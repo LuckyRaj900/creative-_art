@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creative Art — We Build. We Edit. You Shine.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Caveat:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#08070c;
+    --bg-elev:#100e17;
+    --card:#15121e;
+    --card-hover:#1b1726;
+    --border:#292236;
+    --purple:#8b5cf6;
+    --purple-bright:#b39dfb;
+    --purple-deep:#4c1d95;
+    --white:#f6f4fb;
+    --muted:#9c96ac;
+    --muted-dim:#6f6a80;
+    --max:1180px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--white);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--purple);color:#fff;}
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 32px;}
+
+  h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.01em;}
+
+  .script{
+    font-family:'Caveat',cursive;
+    font-weight:700;
+    color:var(--white);
+  }
+
+  /* ---------- focus ---------- */
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--purple-bright);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+
+  /* ---------- nav ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(8,7,12,0.7);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s ease, background .3s ease;
+  }
+  header.scrolled{border-bottom-color:var(--border);background:rgba(8,7,12,0.92);}
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 32px;max-width:var(--max);margin:0 auto;
+  }
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;}
+  .logo .mark{
+    font-size:22px;font-weight:700;letter-spacing:0.02em;
+    display:flex;align-items:center;
+  }
+  .logo .mark .plus{color:var(--purple-bright);font-size:14px;position:relative;top:-8px;left:-2px;}
+  .logo .name{font-size:12px;letter-spacing:0.22em;color:var(--muted);font-family:'Inter',sans-serif;}
+  .nav-links{display:flex;gap:36px;list-style:none;}
+  .nav-links a{
+    font-size:14px;color:var(--muted);font-weight:500;
+    position:relative;padding:4px 0;transition:color .2s ease;
+  }
+  .nav-links a:hover{color:var(--white);}
+  .nav-links a::after{
+    content:'';position:absolute;left:0;bottom:-2px;width:0;height:1px;
+    background:var(--purple-bright);transition:width .25s ease;
+  }
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{
+    font-size:13px;font-weight:600;padding:10px 20px;border-radius:8px;
+    background:var(--purple);color:#fff;border:1px solid var(--purple);
+    transition:background .2s ease, transform .2s ease;
+  }
+  .nav-cta:hover{background:var(--purple-bright);transform:translateY(-1px);}
+  .burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;}
+  .burger span{width:22px;height:2px;background:var(--white);display:block;transition:.25s;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    display:flex;align-items:center;
+    padding:140px 0 80px;
+    overflow:hidden;
+  }
+  .aurora{
+    position:absolute;inset:0;z-index:0;pointer-events:none;
+  }
+  .aurora svg{width:100%;height:100%;}
+  .stars{position:absolute;inset:0;z-index:0;pointer-events:none;}
+  .star{position:absolute;color:var(--purple-bright);opacity:0;animation:twinkle 4s ease-in-out infinite;}
+  @keyframes twinkle{
+    0%,100%{opacity:0;transform:scale(0.6) rotate(0deg);}
+    50%{opacity:1;transform:scale(1) rotate(15deg);}
+  }
+  @keyframes drift{
+    0%{transform:translate(0,0);}
+    50%{transform:translate(-18px,14px);}
+    100%{transform:translate(0,0);}
+  }
+
+  .hero-inner{position:relative;z-index:2;max-width:var(--max);margin:0 auto;padding:0 32px;width:100%;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:12px;letter-spacing:0.24em;color:var(--purple-bright);
+    text-transform:uppercase;margin-bottom:28px;font-weight:600;
+  }
+  .eyebrow::before{content:'';width:22px;height:1px;background:var(--purple-bright);}
+
+  .headline{
+    font-size:clamp(46px,8vw,92px);
+    font-weight:700;line-height:0.98;
+    margin-bottom:8px;
+  }
+  .headline .line{display:block;}
+  .headline .l1{color:var(--white);}
+  .headline .l2{color:var(--purple-bright);}
+  .headline .l3{
+    font-family:'Caveat',cursive;font-weight:700;
+    font-size:clamp(50px,9vw,104px);
+    color:var(--white);
+    margin-top:6px;position:relative;display:inline-block;
+  }
+  .headline .l3 svg{position:absolute;left:2px;bottom:-14px;width:92%;}
+
+  .hero-copy{
+    max-width:520px;color:var(--muted);font-size:17px;line-height:1.7;
+    margin:32px 0 40px;
+  }
+  .hero-copy .hl{color:var(--purple-bright);font-weight:600;}
+
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:64px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:14px 26px;border-radius:9px;font-weight:600;font-size:14.5px;
+    transition:all .22s ease;border:1px solid transparent;
+  }
+  .btn-primary{background:var(--purple);color:#fff;box-shadow:0 0 0 rgba(139,92,246,0);}
+  .btn-primary:hover{background:var(--purple-bright);box-shadow:0 8px 30px -6px rgba(139,92,246,0.55);transform:translateY(-2px);}
+  .btn-ghost{border-color:var(--border);color:var(--white);}
+  .btn-ghost:hover{border-color:var(--purple-bright);color:var(--purple-bright);}
+
+  .hero-stats{display:flex;gap:44px;flex-wrap:wrap;border-top:1px solid var(--border);padding-top:28px;}
+  .hstat b{display:block;font-family:'Space Grotesk',sans-serif;font-size:26px;color:var(--white);}
+  .hstat span{font-size:12.5px;color:var(--muted-dim);letter-spacing:0.03em;}
+
+  /* section shared */
+  section{position:relative;padding:110px 0;}
+  .section-head{max-width:640px;margin-bottom:56px;}
+  .kicker{
+    font-size:12px;letter-spacing:0.24em;text-transform:uppercase;
+    color:var(--purple-bright);font-weight:600;margin-bottom:14px;display:block;
+  }
+  .section-title{font-size:clamp(30px,4vw,44px);font-weight:700;line-height:1.15;}
+  .section-title em{font-style:normal;color:var(--purple-bright);}
+  .section-desc{color:var(--muted);margin-top:16px;font-size:16px;line-height:1.7;}
+
+  /* services */
+  .services{background:var(--bg-elev);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .service-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+  .service-card{
+    background:var(--card);border:1px solid var(--border);border-radius:16px;
+    padding:38px 34px;transition:border-color .25s ease, transform .25s ease, background .25s ease;
+    position:relative;overflow:hidden;
+  }
+  .service-card::before{
+    content:'';position:absolute;top:-60%;right:-30%;width:220px;height:220px;
+    background:radial-gradient(circle,rgba(139,92,246,0.18),transparent 70%);
+    opacity:0;transition:opacity .3s ease;
+  }
+  .service-card:hover{border-color:var(--purple);transform:translateY(-4px);background:var(--card-hover);}
+  .service-card:hover::before{opacity:1;}
+  .s-icon{
+    width:52px;height:52px;border-radius:12px;
+    background:linear-gradient(145deg,rgba(139,92,246,0.22),rgba(139,92,246,0.06));
+    border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;margin-bottom:24px;
+  }
+  .service-card h3{font-size:21px;margin-bottom:12px;font-weight:600;}
+  .service-card p{color:var(--muted);font-size:15px;line-height:1.7;}
+  .service-card .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;}
+  .service-card .tags span{
+    font-size:11.5px;color:var(--purple-bright);border:1px solid var(--border);
+    padding:4px 10px;border-radius:100px;background:rgba(139,92,246,0.06);
+  }
+
+  /* work / projects */
+  .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .proj-card{
+    background:var(--card);border:1px solid var(--border);border-radius:14px;
+    padding:28px;display:flex;flex-direction:column;height:100%;
+    transition:border-color .25s ease, transform .25s ease;
+  }
+  .proj-card:hover{border-color:var(--purple);transform:translateY(-4px);}
+  .proj-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;}
+  .proj-glyph{
+    width:40px;height:40px;border-radius:9px;background:rgba(139,92,246,0.12);
+    display:flex;align-items:center;justify-content:center;color:var(--purple-bright);
+    border:1px solid var(--border);
+  }
+  .proj-link{
+    width:32px;height:32px;border-radius:8px;border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;color:var(--muted);
+    transition:.2s ease;
+  }
+  .proj-card:hover .proj-link{color:var(--white);border-color:var(--purple-bright);}
+  .proj-card h4{font-size:16.5px;font-weight:600;margin-bottom:8px;}
+  .proj-card p{color:var(--muted);font-size:14px;line-height:1.6;flex-grow:1;}
+  .proj-stack{display:flex;gap:6px;flex-wrap:wrap;margin-top:18px;}
+  .proj-stack span{font-size:11px;color:var(--muted-dim);border:1px solid var(--border);padding:3px 9px;border-radius:100px;}
+
+  /* why us band */
+  .why{background:var(--bg-elev);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .why-inner{
+    background:var(--card);border:1px solid var(--border);border-radius:18px;
+    padding:44px 36px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  }
+  .why-item{padding:0 28px;position:relative;}
+  .why-item + .why-item{border-left:1px solid var(--border);}
+  .why-icon{color:var(--purple-bright);margin-bottom:18px;}
+  .why-item h4{font-size:15.5px;font-weight:600;margin-bottom:8px;letter-spacing:0.01em;}
+  .why-item p{font-size:13.5px;color:var(--muted-dim);line-height:1.6;}
+
+  /* cta band */
+  .cta-band{padding:90px 0;text-align:center;}
+  .cta-band p{
+    font-size:clamp(20px,3vw,30px);font-family:'Space Grotesk',sans-serif;font-weight:600;
+    line-height:1.5;
+  }
+  .cta-band .accent{color:var(--purple-bright);}
+  .cta-band .btn{margin-top:34px;}
+  .sparkle-inline{color:var(--purple-bright);}
+
+  /* contact */
+  .contact{background:var(--bg-elev);border-top:1px solid var(--border);}
+  .contact-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:center;}
+  .contact-left h2{font-size:clamp(28px,4vw,40px);margin-bottom:18px;}
+  .contact-left p{color:var(--muted);font-size:16px;line-height:1.75;max-width:440px;}
+  .contact-form{display:flex;flex-direction:column;gap:14px;}
+  .contact-form input,.contact-form textarea{
+    background:var(--card);border:1px solid var(--border);border-radius:10px;
+    padding:14px 16px;color:var(--white);font-family:'Inter',sans-serif;font-size:14.5px;
+    transition:border-color .2s ease;
+  }
+  .contact-form input::placeholder,.contact-form textarea::placeholder{color:var(--muted-dim);}
+  .contact-form input:focus,.contact-form textarea:focus{outline:none;border-color:var(--purple);}
+  .contact-form textarea{resize:vertical;min-height:110px;}
+  .contact-form button{align-self:flex-start;margin-top:6px;cursor:pointer;font-family:'Inter',sans-serif;}
+
+  /* footer */
+  footer{border-top:1px solid var(--border);padding:34px 0;}
+  .foot-inner{
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;
+  }
+  .foot-connect{font-family:'Caveat',cursive;font-size:22px;color:var(--purple-bright);display:flex;align-items:center;gap:8px;}
+  .foot-links{display:flex;gap:28px;flex-wrap:wrap;list-style:none;font-size:13.5px;color:var(--muted);}
+  .foot-links a{display:flex;align-items:center;gap:7px;transition:color .2s ease;}
+  .foot-links a:hover{color:var(--white);}
+  .foot-socials{display:flex;gap:12px;}
+  .foot-socials a{
+    width:34px;height:34px;border-radius:8px;border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;color:var(--muted);
+    transition:.2s ease;
+  }
+  .foot-socials a:hover{color:#fff;border-color:var(--purple-bright);background:rgba(139,92,246,0.1);}
+  .foot-bottom{text-align:center;font-size:12.5px;color:var(--muted-dim);margin-top:26px;}
+
+  /* reveal on scroll */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+
+  @media (prefers-reduced-motion: reduce){
+    .star{animation:none;opacity:.6;}
+    .reveal{transition:none;opacity:1;transform:none;}
+  }
+
+  @media (max-width:900px){
+    .nav-links,.nav-cta{display:none;}
+    .burger{display:flex;}
+    .service-grid{grid-template-columns:1fr;}
+    .work-grid{grid-template-columns:1fr 1fr;}
+    .why-inner{grid-template-columns:1fr 1fr;gap:28px;}
+    .why-item{border-left:none !important;padding:0;}
+    .contact-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:560px){
+    .work-grid{grid-template-columns:1fr;}
+    .why-inner{grid-template-columns:1fr;}
+    .hero-stats{gap:28px;}
+    .foot-inner{flex-direction:column;align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<header id="header">
+  <nav>
+    <a href="#top" class="logo">
+      <span class="mark">CA<span class="plus">✦</span></span>
+      <span class="name">CREATIVE ART</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#top">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Get Started</a>
+    <button class="burger" id="burger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="aurora" id="aurora"></div>
+    <div class="stars" id="stars"></div>
+    <div class="hero-inner">
+      <span class="eyebrow">Web Development &amp; Video Editing Studio</span>
+      <h1 class="headline">
+        <span class="line l1">WE BUILD.</span>
+        <span class="line l2">WE EDIT.</span>
+        <span class="line l3">You Shine.
+          <svg viewBox="0 0 300 14" preserveAspectRatio="none"><path d="M2 8 C 80 14, 220 2, 298 9" stroke="#8b5cf6" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+        </span>
+      </h1>
+      <p class="hero-copy">
+        Creative Art is a startup that helps businesses and creators grow with powerful
+        <span class="hl">websites</span> and engaging <span class="hl">videos</span> —
+        built by one developer who cares about every pixel and every frame.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Start a project →</a>
+        <a href="#work" class="btn btn-ghost">See the work</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><b>20+</b><span>Repositories shipped</span></div>
+        <div class="hstat"><b>2</b><span>Core services</span></div>
+        <div class="hstat"><b>100%</b><span>Focused on results</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker">What We Do</span>
+        <h2 class="section-title">Two crafts. <em>One studio.</em></h2>
+        <p class="section-desc">Every brand needs somewhere to live and a story worth watching. We handle both, end to end.</p>
+      </div>
+      <div class="service-grid">
+        <div class="service-card reveal">
+          <div class="s-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b39dfb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 6 2 12 8 18"/><polyline points="16 6 22 12 16 18"/></svg>
+          </div>
+          <h3>Website Development</h3>
+          <p>Custom, responsive and fast websites that look great and perform even better — built with clean code and a clear structure your customers can navigate.</p>
+          <div class="tags"><span>HTML/CSS/JS</span><span>Responsive</span><span>Fast-loading</span></div>
+        </div>
+        <div class="service-card reveal">
+          <div class="s-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b39dfb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          </div>
+          <h3>Video Editing</h3>
+          <p>Engaging edits that capture attention and tell your story the right way — from raw footage to a cut that keeps people watching to the end.</p>
+          <div class="tags"><span>Storytelling</span><span>Color &amp; pacing</span><span>Social-ready cuts</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker">Selected Work</span>
+        <h2 class="section-title">From the <em>GitHub</em> shelf.</h2>
+        <p class="section-desc">A few builds pulled straight from the workshop — real repos, real code, open for anyone to look under the hood.</p>
+      </div>
+      <div class="work-grid" id="work-grid"><!-- injected by JS --></div>
+      <div style="margin-top:36px;text-align:center;" class="reveal">
+        <a href="https://github.com/LuckyRaj900?tab=repositories" target="_blank" rel="noopener" class="btn btn-ghost">View all repositories on GitHub →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="why" id="why">
+    <div class="wrap">
+      <div class="why-inner reveal">
+        <div class="why-item">
+          <div class="why-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></div>
+          <h4>Creative Solutions</h4>
+          <p>Tailored to your brand, not pulled off a shelf.</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+          <h4>Focused on Results</h4>
+          <p>Built for impact and growth, not just good looks.</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <h4>On Time Delivery</h4>
+          <p>Because your time matters as much as ours.</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
+          <h4>Clear Communication</h4>
+          <p>We listen, we plan, we deliver — no guesswork.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band">
+    <div class="wrap reveal">
+      <p><span class="sparkle-inline">✦</span> You have the vision. <span class="accent">We have the skills.</span> Let's create magic together. <span class="sparkle-inline">✦</span></p>
+      <a href="#contact" class="btn btn-primary">Let's talk</a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div class="contact-left reveal">
+          <span class="kicker">Let's Connect</span>
+          <h2>Have an idea? <br>Let's build it.</h2>
+          <p>Tell me a bit about your project — a website, a video, or both — and I'll get back to you with next steps.</p>
+        </div>
+        <form class="contact-form reveal" onsubmit="event.preventDefault(); this.reset(); const b=this.querySelector('button'); const t=b.textContent; b.textContent='Sent ✓'; setTimeout(()=>b.textContent=t,2200);">
+          <input type="text" placeholder="Your name" required>
+          <input type="email" placeholder="Your email" required>
+          <textarea placeholder="Tell me about your project"></textarea>
+          <button type="submit" class="btn btn-primary">Send message →</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-inner">
+      <a href="#contact" class="foot-connect">Let's connect! <span>→</span></a>
+      <ul class="foot-links">
+        <li><a href="https://github.com/LuckyRaj900" target="_blank" rel="noopener">github.com/LuckyRaj900</a></li>
+        <li><a href="mailto:hello@creativeart.com">hello@creativeart.com</a></li>
+      </ul>
+      <div class="foot-socials">
+        <a href="https://instagram.com/luckyraj._900" target="_blank" rel="noopener" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+        <a href="https://www.youtube.com/c/@alonegamerz900" target="_blank" rel="noopener" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="3"/><polygon points="10 9 15 12 10 15" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://linkedin.com/in/lucky-raj-8032b4289" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/><path d="M10 9h4v2s1.5-2 4-2c3 0 4 2 4 5v7h-4v-6c0-1.5-.5-2.5-2-2.5s-2 1.5-2 2.5v6h-4z"/></svg></a>
+      </div>
+    </div>
+    <p class="foot-bottom">© 2026 Creative Art. We build. We edit. You shine.</p>
+  </div>
+</footer>
+
+<script>
+  // header scroll state
+  const header=document.getElementById('header');
+  window.addEventListener('scroll',()=>{header.classList.toggle('scrolled',window.scrollY>10);});
+
+  // mobile burger -> jump to contact area nav (simple toggle of links visibility)
+  const burger=document.getElementById('burger');
+  const navLinks=document.querySelector('.nav-links');
+  burger.addEventListener('click',()=>{
+    const open=navLinks.style.display==='flex';
+    navLinks.style.display=open?'none':'flex';
+    navLinks.style.cssText=open?'':'display:flex;position:absolute;top:64px;left:0;right:0;flex-direction:column;gap:0;background:#0c0a13;border-bottom:1px solid #292236;padding:8px 32px 18px;';
+    document.querySelectorAll('.nav-links a').forEach(a=>a.style.padding='12px 0');
+  });
+
+  // reveal on scroll
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // aurora waves (signature hero element, echoes the flyer's laptop-screen gradient)
+  const aurora=document.getElementById('aurora');
+  aurora.innerHTML = `
+  <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#5b21b6" stop-opacity="0.35"/>
+        <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="g2" x1="1" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.28"/>
+        <stop offset="100%" stop-color="#4c1d95" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <path fill="url(#g1)">
+      <animate attributeName="d" dur="14s" repeatCount="indefinite"
+        values="M0,300 C300,200 500,450 900,300 C1100,220 1200,350 1200,350 L1200,0 L0,0 Z;
+                M0,250 C350,380 600,150 900,380 C1050,460 1200,300 1200,300 L1200,0 L0,0 Z;
+                M0,300 C300,200 500,450 900,300 C1100,220 1200,350 1200,350 L1200,0 L0,0 Z"/>
+    </path>
+    <path fill="url(#g2)">
+      <animate attributeName="d" dur="18s" repeatCount="indefinite"
+        values="M0,800 C250,600 550,750 800,600 C1000,500 1200,650 1200,650 L1200,800 Z;
+                M0,800 C300,680 500,560 800,700 C1000,780 1200,600 1200,600 L1200,800 Z;
+                M0,800 C250,600 550,750 800,600 C1000,500 1200,650 1200,650 L1200,800 Z"/>
+    </path>
+  </svg>`;
+
+  // scattered sparkle stars
+  const starsWrap=document.getElementById('stars');
+  const positions=[
+    {t:'8%',l:'6%',s:14,d:'0s'},{t:'18%',l:'42%',s:10,d:'1.1s'},{t:'12%',l:'78%',s:16,d:'2.3s'},
+    {t:'40%',l:'12%',s:9,d:'0.6s'},{t:'55%',l:'88%',s:12,d:'1.7s'},{t:'70%',l:'30%',s:11,d:'2.9s'},
+    {t:'80%',l:'65%',s:15,d:'0.3s'},{t:'30%',l:'92%',s:8,d:'1.4s'}
+  ];
+  positions.forEach(p=>{
+    const s=document.createElement('div');
+    s.className='star';
+    s.style.top=p.t; s.style.left=p.l; s.style.fontSize=p.s+'px'; s.style.animationDelay=p.d;
+    s.textContent='✦';
+    starsWrap.appendChild(s);
+  });
+
+  // project data (from github.com/LuckyRaj900)
+  const projects=[
+    {
+      name:'Personal Portfolio',
+      repo:'this-is-my-portfolio-for-advertising-my-self',
+      desc:'A portfolio site built to showcase and advertise personal work.',
+      stack:['HTML'],
+      icon:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>'
+    },
+    {
+      name:'Gorilla Game',
+      repo:'GorillaGame',
+      desc:'A classic Gorilla-style game with single-player and multiplayer modes.',
+      stack:['HTML','CSS','JavaScript'],
+      icon:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="3"/><line x1="7" y1="10" x2="7" y2="14"/><line x1="5" y1="12" x2="9" y2="12"/><circle cx="16" cy="10" r="1" fill="currentColor"/><circle cx="18" cy="13" r="1" fill="currentColor"/></svg>'
+    },
+    {
+      name:'Portfolio',
+      repo:'Portfolio',
+      desc:'A personal portfolio site built from scratch with HTML, CSS and JS.',
+      stack:['HTML','CSS','JavaScript'],
+      icon:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>'
+    },
+    {
+      name:'Portfolio v2',
+      repo:'portfolio-',
+      desc:'A second portfolio build, iterating on layout and presentation.',
+      stack:['HTML'],
+      icon:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>'
+    },
+    {
+      name:'Login &amp; Register Page',
+      repo:'register-login-page-',
+      desc:'A clean, ready-to-use login and registration page UI.',
+      stack:['HTML','CSS'],
+      icon:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>'
+    },
+    {
+      name:'Profile README',
+      repo:'LuckyRaj900',
+      desc:'The GitHub profile README — stats, streaks and tech stack, all in one place.',
+      stack:['Markdown'],
+      icon:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>'
+    }
+  ];
+  const grid=document.getElementById('work-grid');
+  grid.innerHTML = projects.map(p=>`
+    <div class="proj-card reveal">
+      <div class="proj-top">
+        <div class="proj-glyph">${p.icon}</div>
+        <a class="proj-link" href="https://github.com/LuckyRaj900/${p.repo}" target="_blank" rel="noopener" aria-label="View ${p.name} on GitHub">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </a>
+      </div>
+      <h4>${p.name}</h4>
+      <p>${p.desc}</p>
+      <div class="proj-stack">${p.stack.map(s=>`<span>${s}</span>`).join('')}</div>
+    </div>
+  `).join('');
+  document.querySelectorAll('#work-grid .reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
